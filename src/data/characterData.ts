@@ -25,6 +25,9 @@ export interface CyberCharacter {
   avatarVariant: 'sonu' | 'sonu-btech' | 'sonu-intermediate' | 'asuka' | 'shiro' | 'kaede';
   specialty: string;
   coreTopics?: string;
+  coreSubjects?: string[];
+  foundationalUnits?: string[];
+  secondaryParagraph?: string;
   backstory: string;
   primaryWeapon: {
     name: string;
@@ -55,14 +58,26 @@ export interface CyberCharacter {
 export const CYBER_CHARACTERS: CyberCharacter[] = [
   {
     id: 'sonu',
-    name: 'Ellumalla Sonu',
+    name: 'ELLUMALLA SONU',
     role: 'MASTER OF CYBERSECURITY',
-    codename: 'The Core Architect // Field 01',
-    tagline: 'Curtin University Dubai · Pursuing Master of Cybersecurity',
+    codename: 'The Cybersecurity Architect // Field 01',
+    tagline: 'Curtin University Dubai · Master of Cybersecurity (2026 – Present)',
     avatarVariant: 'sonu',
-    specialty: 'Offensive and defensive technicalities',
-    coreTopics: 'Penetration testing, secure DevOps, network defense, data security, intrusion detection, and securing hardware and operating systems.',
-    backstory: 'Sonu possesses a meticulous yet proactive approach, symbolizing an analytical mind with steadfast dedication to enterprise cyber resilience. Bridging Blue Team SOC defense, vulnerability assessments, and AI threat modeling, his methodology reflects deep technical competence and strategic vigilance.',
+    specialty: 'Offensive Security, Defensive Operations & Secure Engineering',
+    coreTopics: 'Penetration testing, intrusion detection, incident handling and forensics in network defence, secure DevOps (DevSecOps), data network security.',
+    coreSubjects: [
+      'Penetration Testing',
+      'Intrusion Detection',
+      'Incident Handling and Forensics in Network Defence',
+      'Secure DevOps (DevSecOps)',
+      'Data Network Security'
+    ],
+    backstory: 'Currently pursuing a Master of Cybersecurity at Curtin University Dubai, Sonu is developing advanced knowledge across offensive security, defensive operations, digital forensics, network protection, and secure software engineering.',
+    secondaryParagraph: 'The programme combines practical security techniques with foundational research and security architecture concepts, preparing him to understand, investigate, prevent, and respond to modern cyber threats.',
+    foundationalUnits: [
+      'Fundamental Concepts of Data Security',
+      'STEM Research Methodologies'
+    ],
     primaryWeapon: {
       name: 'Splunk SIEM & Wireshark Deep Dissector',
       description: 'Core telemetry engine capable of packet-level dissection, log aggregation, and anomalous signature detection across enterprise infrastructures.'
@@ -71,7 +86,7 @@ export const CYBER_CHARACTERS: CyberCharacter[] = [
       name: 'AI-Powered Intrusion Sentinel',
       description: 'Machine learning heuristics detecting brute-force surges, stealth port sweeps, and DDoS volumetric flood patterns before breach.'
     },
-    tools: ['Splunk', 'Wireshark', 'Python 3', 'Machine Learning', 'Gemini API', 'Kali Linux', 'Nessus', 'MySQL'],
+    tools: ['Penetration Testing', 'Intrusion Detection', 'Incident Handling & Forensics', 'DevSecOps', 'Data Network Security', 'Splunk SIEM', 'Wireshark', 'Python 3'],
     stats: {
       defense: 99,
       offense: 95,
@@ -79,9 +94,9 @@ export const CYBER_CHARACTERS: CyberCharacter[] = [
       speed: 92
     },
     rating: 5,
-    institutionOrOrg: 'Curtin University Dubai · Pursuing Master of Cybersecurity',
+    institutionOrOrg: 'Curtin University Dubai · Master of Cybersecurity (2026 – Present)',
     theme: {
-      name: 'Cyber Teal Core',
+      name: 'Cybersecurity Academic Core',
       number: '01',
       primaryHex: '#06b6d4',
       secondaryHex: '#0284c7',
@@ -195,7 +210,7 @@ export const CYBER_CHARACTERS: CyberCharacter[] = [
     tagline: 'Sri Chaitanya School · Palasa · Scored: 92%',
     avatarVariant: 'asuka',
     specialty: 'Secondary School Certificate (SSC) · State Board',
-    backstory: 'Secondary education successfully completed at Sri Chaitanya School, Palasa in 2020 under the State Board of Secondary Education, Andhra Pradesh with 92% score, laying a strong mathematics and scientific foundation for subsequent engineering studies.',
+    backstory: 'Successfully completed Secondary School Education at Sri Chaitanya School, Palasa, in 2020 under the Board of Secondary Education, Andhra Pradesh, achieving 92%. Developed a strong foundation in mathematics, science, and analytical thinking, supporting subsequent academic growth.',
     primaryWeapon: {
       name: 'Secondary Science & Mathematics Core',
       description: 'Foundational STEM curriculum, analytical reasoning, and disciplined academic foundation.'

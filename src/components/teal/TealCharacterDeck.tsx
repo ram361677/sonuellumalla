@@ -6,16 +6,14 @@ import { SonuActiveSentinelModal } from './SonuActiveSentinelModal';
 import { SonuUndergradModal } from './SonuUndergradModal';
 import { SonuIntermediateModal } from './SonuIntermediateModal';
 import { SonuTenthSchoolModal } from './SonuTenthSchoolModal';
-import { SonuPortrait } from '../SonuPortrait';
-import { SonuBtechPortrait } from '../SonuBtechPortrait';
-import { SonuIntermediatePortrait } from '../SonuIntermediatePortrait';
-import { SonuTenthPortrait } from '../SonuTenthPortrait';
 import { 
   ArrowRight, 
   GraduationCap, 
   Layers, 
   ChevronLeft, 
-  ChevronRight 
+  ChevronRight,
+  BookOpen,
+  Award
 } from 'lucide-react';
 import { useTheme } from '../../context/ThemeContext';
 
@@ -193,20 +191,6 @@ export const TealCharacterDeck: React.FC<TealCharacterDeckProps> = ({
     else if (charId === 'tenth' || charId === 'asuka') setIsTenthModalOpen(true);
   };
 
-  const renderPortrait = (char: CyberCharacter) => {
-    switch (char.avatarVariant) {
-      case 'sonu':
-        return <SonuPortrait className="w-full h-full" />;
-      case 'sonu-btech':
-        return <SonuBtechPortrait className="w-full h-full" />;
-      case 'sonu-intermediate':
-        return <SonuIntermediatePortrait className="w-full h-full" />;
-      case 'asuka':
-      default:
-        return <SonuTenthPortrait className="w-full h-full" />;
-    }
-  };
-
   return (
     <section 
       id="character-deck"
@@ -293,7 +277,7 @@ export const TealCharacterDeck: React.FC<TealCharacterDeckProps> = ({
         ref={cardContainerRef}
         onMouseEnter={() => { isHoveringCardRef.current = true; }}
         onMouseLeave={() => { isHoveringCardRef.current = false; }}
-        className="relative w-full max-w-6xl mx-auto h-[480px] sm:h-[510px] lg:h-[540px]"
+        className="relative w-full max-w-6xl mx-auto min-h-[520px] sm:min-h-[550px] lg:h-[580px]"
       >
         
         <AnimatePresence mode="wait" initial={false}>
@@ -377,187 +361,210 @@ export const TealCharacterDeck: React.FC<TealCharacterDeckProps> = ({
                     : 'bg-[#042435] border-cyan-500/30 text-cyan-200'
                 }`}
               >
-                {activeChar.id === 'sonu' ? "PURSUING MASTER OF CYBERSECURITY" :
+                {activeChar.id === 'sonu' ? "MASTER OF CYBERSECURITY (2026 – PRESENT)" :
                  activeChar.id === 'shiro' ? "BACHELOR'S IN CSE · CGPA: 7.47" :
                  activeChar.id === 'kaede' ? "SENIOR SECONDARY · SCORED: 68%" :
                  "SECONDARY EDUCATION · SCORED: 92%"}
               </div>
             </div>
 
-            {/* 2-COLUMN STRUCTURE: LEFT SIDE PHOTO · RIGHT SIDE MATTER */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-8 items-center h-[calc(100%-48px)]">
+            {/* ========================================================
+                CARD DETAILS ONLY (PHOTOS REMOVED AS REQUESTED)
+               ======================================================== */}
+            <div className="h-[calc(100%-48px)] flex flex-col justify-between space-y-3 overflow-y-auto pr-1 sm:pr-2 custom-scrollbar text-left">
               
-              {/* ========================================================
-                  LEFT SIDE: PHOTO CONTAINER
-                 ======================================================== */}
-              <div className="lg:col-span-5 h-full flex flex-col items-center justify-center">
-                <div 
-                  className="relative w-full h-[300px] sm:h-[350px] lg:h-[390px] rounded-[24px] overflow-hidden border shadow-xl transition-all duration-300"
-                  style={{
-                    borderColor: isBatman ? '#54202B' : `${activeTheme.primaryHex}66`,
-                    boxShadow: isBatman ? `0 0 35px rgba(165,28,45,0.3)` : `0 0 35px ${activeTheme.glowRgba}`
-                  }}
-                >
-                  {/* Portrait Component */}
-                  <div className={`absolute inset-0 w-full h-full ${isBatman ? 'bg-[#0B0B0F]' : 'bg-[#030e16]'}`}>
-                    {renderPortrait(activeChar)}
-                  </div>
-
-                  {/* Corner Accent Decals */}
-                  <div 
-                    className="absolute top-3 left-3 w-4 h-4 border-t-2 border-l-2 pointer-events-none"
-                    style={{ borderColor: activeTheme.primaryHex }}
-                  />
-                  <div 
-                    className="absolute top-3 right-3 w-4 h-4 border-t-2 border-r-2 pointer-events-none"
-                    style={{ borderColor: activeTheme.primaryHex }}
-                  />
-                  <div 
-                    className="absolute bottom-3 left-3 w-4 h-4 border-b-2 border-l-2 pointer-events-none"
-                    style={{ borderColor: activeTheme.primaryHex }}
-                  />
-                  <div 
-                    className="absolute bottom-3 right-3 w-4 h-4 border-b-2 border-r-2 pointer-events-none"
-                    style={{ borderColor: activeTheme.primaryHex }}
-                  />
-
-                  {/* Floating Bottom Card Strip on Photo */}
-                  <div 
-                    className={`absolute bottom-0 inset-x-0 p-3 backdrop-blur-md border-t flex items-center justify-between ${
+              {/* Header: Codename, Degree, Name & Institution */}
+              <div className="space-y-1">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span 
+                    className={`text-[10px] font-cinematic uppercase tracking-widest px-2.5 py-0.5 rounded border ${
                       isBatman
-                        ? 'bg-[#0B0B0F]/95 border-[#54202B] text-[#E8DCC8]'
-                        : 'bg-[#041c2c]/95 border-cyan-500/30 text-white'
+                        ? 'bg-[#310D18] border-[#54202B] text-[#E8DCC8]'
+                        : 'bg-[#042435] border-cyan-500/30 text-cyan-200'
                     }`}
                   >
-                    <div>
-                      <div className={`font-cinematic font-bold text-base tracking-wider uppercase ${
-                        isBatman ? 'text-[#E8DCC8]' : 'text-white'
-                      }`}>
-                        {activeChar.name}
-                      </div>
-                      <div 
-                        className="text-[10px] sm:text-[11px] font-mono font-medium truncate"
-                        style={{ color: activeTheme.primaryHex }}
-                      >
-                        {activeChar.tagline.split('·')[0]}
-                      </div>
-                    </div>
-
-                    <button
-                      onClick={() => handleOpenModal(activeChar.id)}
-                      className={`p-1.5 rounded-lg text-xs font-mono font-bold uppercase transition-all cursor-pointer shadow-md flex items-center gap-1 ${
-                        isBatman
-                          ? 'bg-[#A51C2D] text-[#E8DCC8] hover:bg-[#6F101B]'
-                          : 'bg-cyan-500/20 text-cyan-300 border border-cyan-400/40 hover:bg-cyan-500/30'
-                      }`}
-                      title="Click to view full dossier"
-                    >
-                      <GraduationCap className="w-4 h-4" />
-                    </button>
-                  </div>
+                    {activeChar.codename}
+                  </span>
                 </div>
 
-                <div className={`mt-1 text-center text-[10px] font-mono ${
-                  isBatman ? 'text-[#B9A1A0]' : 'text-slate-400'
-                }`}>
-                  Left side portrait · Click camera icon to upload custom image
-                </div>
-              </div>
-
-              {/* ========================================================
-                  RIGHT SIDE: MATTER / INFORMATION
-                 ======================================================== */}
-              <div className="lg:col-span-7 h-full flex flex-col justify-between space-y-2 overflow-y-auto pr-1 custom-scrollbar text-left">
-                
-                {/* Title & Organization Header */}
-                <div className="space-y-0.5">
-                  <div className="flex items-center gap-2">
-                    <span 
-                      className={`text-[10px] font-cinematic uppercase tracking-widest px-2.5 py-0.5 rounded border ${
-                        isBatman
-                          ? 'bg-[#310D18] border-[#54202B] text-[#E8DCC8]'
-                          : 'bg-[#042435] border-cyan-500/30 text-cyan-200'
-                      }`}
-                    >
-                      {activeChar.specialty.split('·')[0]}
-                    </span>
-                  </div>
-
-                  <h3 className={`text-xl sm:text-2xl lg:text-3xl font-bold font-cinematic tracking-wider leading-snug uppercase ${
+                <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
+                  <h3 className={`text-2xl sm:text-3xl lg:text-4xl font-bold font-cinematic tracking-wider uppercase ${
                     isBatman ? 'text-[#E8DCC8]' : 'text-white'
                   }`}>
                     {activeChar.role}
                   </h3>
-
-                  <div 
-                    className="text-xs font-mono font-semibold"
-                    style={{ color: activeTheme.primaryHex }}
-                  >
-                    {activeChar.institutionOrOrg}
+                  <div className={`text-xs sm:text-sm font-cinematic font-bold tracking-widest uppercase ${
+                    isBatman ? 'text-[#C45A50]' : 'text-cyan-400'
+                  }`}>
+                    {activeChar.name}
                   </div>
                 </div>
 
-                {/* Academic Domain & Core Specialization (Replaces gaming weapons & backstory) */}
-                <div className={`p-3.5 sm:p-4 rounded-2xl border space-y-2.5 ${
+                <div 
+                  className="text-xs sm:text-sm font-mono font-semibold"
+                  style={{ color: activeTheme.primaryHex }}
+                >
+                  {activeChar.institutionOrOrg}
+                </div>
+              </div>
+
+              {/* Academic Domain & Core Specialization Details Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 flex-1">
+                
+                {/* LEFT PANEL: ACADEMIC FOCUS & SPECIALIZATION */}
+                <div className={`p-4 rounded-2xl border space-y-2.5 flex flex-col justify-between ${
                   isBatman
                     ? 'bg-[#17171C]/90 border-[#54202B]'
                     : 'bg-[#041c2c]/90 border-cyan-500/30'
                 }`}>
-                  <div className={`text-[10px] font-cinematic uppercase tracking-widest font-bold flex items-center gap-1.5 ${
-                    isBatman ? 'text-[#C45A50]' : 'text-cyan-300'
-                  }`}>
-                    <GraduationCap className="w-3.5 h-3.5" style={{ color: activeTheme.primaryHex }} />
-                    <span>Academic Focus & Technical Domain</span>
+                  <div className="space-y-2">
+                    <div className={`text-[10px] font-cinematic uppercase tracking-widest font-bold flex items-center gap-1.5 ${
+                      isBatman ? 'text-[#C45A50]' : 'text-cyan-300'
+                    }`}>
+                      <GraduationCap className="w-3.5 h-3.5" style={{ color: activeTheme.primaryHex }} />
+                      <span>LEFT PANEL: ACADEMIC FOCUS & SPECIALIZATION</span>
+                    </div>
+                    <p className={`text-xs sm:text-sm font-semibold leading-relaxed ${
+                      isBatman ? 'text-[#E8DCC8]' : 'text-white'
+                    }`}>
+                      {activeChar.specialty}
+                    </p>
                   </div>
-                  <p className={`text-xs sm:text-base font-medium leading-relaxed ${
-                    isBatman ? 'text-[#E8DCC8]' : 'text-slate-100'
-                  }`}>
-                    {activeChar.specialty}
-                  </p>
 
-                  {activeChar.coreTopics && (
-                    <div className={`pt-2.5 mt-2 border-t ${
+                  {activeChar.coreSubjects ? (
+                    <div className={`pt-2.5 border-t space-y-1.5 ${
                       isBatman ? 'border-[#54202B]/60' : 'border-cyan-500/25'
                     }`}>
-                      <span className={`text-[10px] uppercase font-mono font-bold tracking-wider block mb-1 ${
+                      <span className={`text-[10px] uppercase font-mono font-bold tracking-wider block ${
+                        isBatman ? 'text-[#C45A50]' : 'text-cyan-300'
+                      }`}>
+                        CORE SUBJECTS:
+                      </span>
+                      <ul className="space-y-1 text-xs">
+                        {activeChar.coreSubjects.map((sub) => (
+                          <li key={sub} className="flex items-start gap-2">
+                            <span className="w-1.5 h-1.5 rounded-full mt-1.5 shrink-0" style={{ backgroundColor: activeTheme.primaryHex }} />
+                            <span className={isBatman ? 'text-[#E8DCC8]/90 font-medium' : 'text-slate-200 font-medium'}>{sub}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ) : activeChar.coreTopics ? (
+                    <div className={`pt-2 mt-2 border-t ${
+                      isBatman ? 'border-[#54202B]/60' : 'border-cyan-500/25'
+                    }`}>
+                      <span className={`text-[10px] uppercase font-mono font-bold tracking-wider block mb-0.5 ${
                         isBatman ? 'text-[#C45A50]' : 'text-cyan-300'
                       }`}>
                         Core Topics:
                       </span>
-                      <p className={`text-xs sm:text-sm leading-relaxed font-light ${
+                      <p className={`text-xs leading-relaxed font-light ${
                         isBatman ? 'text-[#E8DCC8]/90' : 'text-slate-200'
                       }`}>
                         {activeChar.coreTopics}
                       </p>
                     </div>
+                  ) : null}
+                </div>
+
+                {/* RIGHT PANEL: ACADEMIC FOUNDATION & BACKGROUND */}
+                <div className={`p-4 rounded-2xl border space-y-2.5 flex flex-col justify-between ${
+                  isBatman
+                    ? 'bg-[#17171C]/90 border-[#54202B]'
+                    : 'bg-[#041c2c]/90 border-cyan-500/30'
+                }`}>
+                  <div className="space-y-2">
+                    <div className={`text-[10px] font-cinematic uppercase tracking-widest font-bold flex items-center gap-1.5 ${
+                      isBatman ? 'text-[#C45A50]' : 'text-cyan-300'
+                    }`}>
+                      <Layers className="w-3.5 h-3.5" style={{ color: activeTheme.primaryHex }} />
+                      <span>RIGHT PANEL: ACADEMIC FOUNDATION & BACKGROUND</span>
+                    </div>
+                    <p className={`text-xs leading-relaxed font-light ${
+                      isBatman ? 'text-[#E8DCC8]/90' : 'text-slate-200'
+                    }`}>
+                      {activeChar.backstory}
+                    </p>
+                    {activeChar.secondaryParagraph && (
+                      <p className={`text-xs leading-relaxed font-light ${
+                        isBatman ? 'text-[#E8DCC8]/80' : 'text-slate-300'
+                      }`}>
+                        {activeChar.secondaryParagraph}
+                      </p>
+                    )}
+                  </div>
+
+                  {activeChar.foundationalUnits ? (
+                    <div className={`pt-2.5 border-t space-y-1.5 ${
+                      isBatman ? 'border-[#54202B]/60' : 'border-cyan-500/25'
+                    }`}>
+                      <span className={`text-[10px] uppercase font-mono font-bold tracking-wider block ${
+                        isBatman ? 'text-[#C45A50]' : 'text-cyan-300'
+                      }`}>
+                        FOUNDATIONAL & ARCHITECTURE UNITS:
+                      </span>
+                      <ul className="space-y-1 text-xs">
+                        {activeChar.foundationalUnits.map((unit) => (
+                          <li key={unit} className="flex items-start gap-2">
+                            <span className="w-1.5 h-1.5 rounded-full mt-1.5 shrink-0" style={{ backgroundColor: activeTheme.secondaryHex }} />
+                            <span className={isBatman ? 'text-[#E8DCC8]/90 font-medium' : 'text-slate-200 font-medium'}>{unit}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ) : (
+                    /* Key Technologies & Subjects for other cards */
+                    <div className={`pt-2 border-t ${
+                      isBatman ? 'border-[#54202B]/60' : 'border-cyan-500/25'
+                    }`}>
+                      <span className={`text-[10px] uppercase font-mono font-bold tracking-wider block mb-1.5 ${
+                        isBatman ? 'text-[#C45A50]' : 'text-cyan-300'
+                      }`}>
+                        Core Subjects & Tools:
+                      </span>
+                      <div className="flex flex-wrap gap-1.5">
+                        {activeChar.tools.map((tool) => (
+                          <span 
+                            key={tool}
+                            className={`px-2 py-0.5 rounded text-[10px] font-mono border ${
+                              isBatman
+                                ? 'bg-[#0B0B0F] border-[#54202B] text-[#E8DCC8]'
+                                : 'bg-[#02131e] border-cyan-500/30 text-cyan-200'
+                            }`}
+                          >
+                            {tool}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
                   )}
                 </div>
 
-                {/* Card Action Footer */}
-                <div className={`pt-2 border-t flex flex-wrap items-center justify-between gap-2 ${
-                  isBatman ? 'border-[#54202B]' : 'border-cyan-500/25'
-                }`}>
-                  <div className={`text-[10px] font-mono ${isBatman ? 'text-[#B9A1A0]' : 'text-slate-400'}`}>
-                    <span>Milestone:</span>{' '}
-                    <strong className={isBatman ? 'text-[#E8DCC8]' : 'text-white'}>
-                      {activeChar.institutionOrOrg.split('·')[0]}
-                    </strong>
-                  </div>
+              </div>
 
-                  <button
-                    onClick={() => handleOpenModal(activeChar.id)}
-                    className={`px-4 py-1.5 rounded-full text-xs font-cinematic uppercase tracking-wider font-bold transition-all cursor-pointer shadow-md flex items-center gap-1.5 ${
-                      isBatman
-                        ? 'bg-[#A51C2D] hover:bg-[#6F101B] text-[#E8DCC8] shadow-[0_0_15px_rgba(165,28,45,0.4)]'
-                        : 'bg-gradient-to-r from-cyan-500 via-teal-500 to-emerald-500 hover:opacity-90 text-slate-950 border border-cyan-300 shadow-[0_0_20px_rgba(6,182,212,0.4)]'
-                    }`}
-                  >
-                    <GraduationCap className="w-3.5 h-3.5" />
-                    <span>Inspect Education Dossier</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </button>
+              {/* BOTTOM SECTION */}
+              <div className={`pt-2.5 border-t flex flex-wrap items-center justify-between gap-3 ${
+                isBatman ? 'border-[#54202B]' : 'border-cyan-500/25'
+              }`}>
+                <div className={`text-xs font-mono ${isBatman ? 'text-[#B9A1A0]' : 'text-slate-400'}`}>
+                  <span>Milestone:</span>{' '}
+                  <strong className={isBatman ? 'text-[#E8DCC8]' : 'text-white'}>
+                    {activeChar.institutionOrOrg}
+                  </strong>
                 </div>
 
+                <button
+                  onClick={() => handleOpenModal(activeChar.id)}
+                  className={`px-5 py-2 rounded-full text-xs font-cinematic uppercase tracking-wider font-bold transition-all cursor-pointer shadow-md flex items-center gap-2 ${
+                    isBatman
+                      ? 'bg-[#A51C2D] hover:bg-[#6F101B] text-[#E8DCC8] shadow-[0_0_15px_rgba(165,28,45,0.4)]'
+                      : 'bg-gradient-to-r from-cyan-500 via-teal-500 to-emerald-500 hover:opacity-90 text-slate-950 border border-cyan-300 shadow-[0_0_20px_rgba(6,182,212,0.4)]'
+                  }`}
+                >
+                  <GraduationCap className="w-4 h-4" />
+                  <span>Inspect Education Dossier</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </button>
               </div>
 
             </div>

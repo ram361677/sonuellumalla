@@ -10,15 +10,12 @@ import {
   ShieldCheck, 
   Mail, 
   Phone,
-  Camera,
   CheckCircle2,
   FileCheck,
   Linkedin,
   Github
 } from 'lucide-react';
 import { PERSONAL_INFO } from '../../data/portfolioData';
-import { SonuPortrait } from '../SonuPortrait';
-import { saveLargeFile, safeLocalStorageSet } from '../../utils/idbStorage';
 import { useTheme } from '../../context/ThemeContext';
 
 interface SonuActiveSentinelModalProps {
@@ -118,63 +115,11 @@ export const SonuActiveSentinelModal: React.FC<SonuActiveSentinelModalProps> = (
         <div className="relative z-10 p-6 sm:p-8 overflow-y-auto custom-scrollbar space-y-6">
           
           {/* Top Profile Header */}
-          <div className={`flex flex-col sm:flex-row items-center sm:items-start gap-6 p-5 sm:p-6 rounded-3xl border shadow-sm ${
+          <div className={`p-5 sm:p-6 rounded-3xl border shadow-sm ${
             isBatman ? 'bg-[#17171C] border-[#54202B]' : 'bg-[#051724] border-cyan-500/25'
           }`}>
-            
-            {/* Sonu's Photo */}
-            <div className="shrink-0 flex flex-col items-center gap-2.5">
-              <div className="relative group">
-                <div className={`w-44 h-56 sm:w-48 sm:h-60 rounded-3xl overflow-hidden border-2 shadow-md ${
-                  isBatman ? 'border-[#54202B] bg-[#0B0B0F]' : 'border-cyan-500/30 bg-[#030e16]'
-                }`}>
-                  <SonuPortrait className="w-full h-full" />
-                </div>
-                <div className={`absolute -bottom-2 inset-x-0 mx-auto w-fit px-3.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider shadow-md flex items-center gap-1.5 font-cinematic ${
-                  isBatman
-                    ? 'bg-[#A51C2D] text-[#E8DCC8]'
-                    : 'bg-gradient-to-r from-cyan-500 to-teal-500 text-slate-950 font-bold'
-                }`}>
-                  <span className={`w-1.5 h-1.5 rounded-full animate-pulse ${
-                    isBatman ? 'bg-[#E8DCC8]' : 'bg-slate-950'
-                  }`} />
-                  <span>ACTIVE SENTINEL</span>
-                </div>
-              </div>
-
-              {/* Upload Original File Button */}
-              <label className={`cursor-pointer text-xs flex items-center gap-2 px-3 py-1.5 rounded-full border shadow-sm transition-all mt-2 active:scale-95 font-cinematic uppercase tracking-wider text-[11px] ${
-                isBatman
-                  ? 'text-[#E8DCC8] hover:text-white bg-[#0B0B0F] hover:bg-[#310D18] border-[#54202B]'
-                  : 'text-cyan-200 hover:text-white bg-[#041c2c] hover:bg-[#072d42] border-cyan-500/30'
-              }`}>
-                <input
-                  type="file"
-                  accept="image/*"
-                  className="hidden"
-                  onChange={(e) => {
-                    const file = e.target.files?.[0];
-                    if (file) {
-                      const reader = new FileReader();
-                      reader.onload = async (event) => {
-                        const base64 = event.target?.result as string;
-                        if (base64) {
-                          safeLocalStorageSet('sonu_profile_photo', base64);
-                          await saveLargeFile('sonu_profile_photo', base64);
-                          window.dispatchEvent(new Event('sonu_photo_updated'));
-                        }
-                      };
-                      reader.readAsDataURL(file);
-                    }
-                  }}
-                />
-                <Camera className={`w-3.5 h-3.5 ${isBatman ? 'text-[#A51C2D]' : 'text-cyan-400'}`} />
-                <span>Upload Original Photo</span>
-              </label>
-            </div>
-
             {/* Academic & Personal Identification */}
-            <div className="flex-1 space-y-3 text-center sm:text-left">
+            <div className="space-y-3 text-left">
               <div>
                 <div className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full border text-xs font-bold mb-1 uppercase font-cinematic tracking-wider ${
                   isBatman
@@ -225,7 +170,7 @@ export const SonuActiveSentinelModal: React.FC<SonuActiveSentinelModalProps> = (
                   <Calendar className={`w-4 h-4 shrink-0 ${isBatman ? 'text-[#A51C2D]' : 'text-cyan-400'}`} />
                   <div>
                     <div className={`text-[10px] uppercase font-mono ${isBatman ? 'text-[#B9A1A0]' : 'text-slate-400'}`}>Course Duration</div>
-                    <div className={`font-bold ${isBatman ? 'text-[#C45A50]' : 'text-cyan-300'}`}>August 2026 – July 2027</div>
+                    <div className={`font-bold ${isBatman ? 'text-[#C45A50]' : 'text-cyan-300'}`}>2026 – Present</div>
                   </div>
                 </div>
 

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { SonuBtechPortrait } from '../SonuBtechPortrait';
 import { BtechCertificateModal } from './BtechCertificateModal';
 import { 
   X, 
@@ -9,7 +8,6 @@ import {
   GraduationCap, 
   Mail, 
   Phone, 
-  Camera, 
   Building2,
   Award,
   FileCheck,
@@ -89,63 +87,11 @@ export const SonuUndergradModal: React.FC<SonuUndergradModalProps> = ({
         <div className="relative z-10 p-6 sm:p-8 overflow-y-auto custom-scrollbar space-y-6">
           
           {/* Top Profile Header */}
-          <div className={`flex flex-col sm:flex-row items-center sm:items-start gap-6 pb-6 border-b ${
+          <div className={`pb-6 border-b ${
             isBatman ? 'border-[#54202B]' : 'border-emerald-500/20'
           }`}>
-            
-            {/* Sonu's BTech Photo */}
-            <div className="shrink-0 flex flex-col items-center gap-2.5">
-              <div className="relative group">
-                <div className={`w-44 h-56 sm:w-48 sm:h-60 rounded-3xl overflow-hidden border-2 shadow-md ${
-                  isBatman ? 'border-[#54202B] bg-[#0B0B0F]' : 'border-emerald-500/35 bg-[#041c17]'
-                }`}>
-                  <SonuBtechPortrait className="w-full h-full" />
-                </div>
-                <div className={`absolute -bottom-2 inset-x-0 mx-auto w-fit px-3.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider shadow-md flex items-center gap-1.5 font-cinematic ${
-                  isBatman 
-                    ? 'bg-[#A51C2D] text-[#E8DCC8]' 
-                    : 'bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 font-bold'
-                }`}>
-                  <span className={`w-1.5 h-1.5 rounded-full animate-pulse ${
-                    isBatman ? 'bg-[#E8DCC8]' : 'bg-slate-950'
-                  }`} />
-                  <span>B.TECH CSE</span>
-                </div>
-              </div>
-
-              {/* Upload Original File Button */}
-              <label className={`cursor-pointer text-xs flex items-center gap-2 px-4 py-2 rounded-full border shadow-sm transition-all mt-2 active:scale-95 font-cinematic uppercase tracking-wider text-[11px] ${
-                isBatman
-                  ? 'text-[#E8DCC8] hover:text-white bg-[#0B0B0F] hover:bg-[#310D18] border-[#54202B]'
-                  : 'text-emerald-200 hover:text-white bg-[#04241d] hover:bg-[#07362b] border-emerald-500/30'
-              }`}>
-                <input
-                  type="file"
-                  accept="image/*"
-                  className="hidden"
-                  onChange={(e) => {
-                    const file = e.target.files?.[0];
-                    if (file) {
-                      const reader = new FileReader();
-                      reader.onload = async (event) => {
-                        const base64 = event.target?.result as string;
-                        if (base64) {
-                          safeLocalStorageSet('sonu_btech_photo', base64);
-                          await saveLargeFile('sonu_btech_photo', base64);
-                          window.dispatchEvent(new Event('sonu_btech_photo_updated'));
-                        }
-                      };
-                      reader.readAsDataURL(file);
-                    }
-                  }}
-                />
-                <Camera className={`w-3.5 h-3.5 ${isBatman ? 'text-[#A51C2D]' : 'text-emerald-400'}`} />
-                <span>Upload B.Tech Photo</span>
-              </label>
-            </div>
-
             {/* Academic & Personal Identification */}
-            <div className="flex-1 space-y-3 text-center sm:text-left">
+            <div className="space-y-3 text-left">
               <div>
                 <div className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full border text-xs font-bold mb-1 uppercase font-cinematic tracking-wider ${
                   isBatman
